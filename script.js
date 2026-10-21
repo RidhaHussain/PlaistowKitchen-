@@ -71,31 +71,105 @@ document.getElementById("bookingForm").addEventListener("submit", function(event
 
     message.textContent = "Booking confirmed! Thank you, " + name + ".";
     document.getElementById("bookingForm").reset();
-});
-let stockItems = {
-    rice: 5,
-    pasta: 9,
-    tomato: 11
+
+   let stockItems = JSON.parse(localStorage.getItem("kitchenStock")) || {
+    rice: { name: "Rice", quantity: 5 },
+    pasta: { name: "Pasta", quantity: 9 },
+    tomato: { name: "Tins of tomatoes", quantity: 11 }
 };
 
-function changeStock(item, amount) {
-    if (stockItems[item] + amount < 0) {
+function saveStock() {
+    localStorage.setItem("kitchenStock", JSON.stringify(stockItems));
+}
+
+function displayStock() {
+    const list = document.getElementById("stockList");
+    list.innerHTML = "";
+
+    for (const id in stockItems) {
+        const item = stockItems[id];
+
+        const card = document.createElement("div");
+        card.className = "stock-item";
+
+        const heading = document.createElement("h3");
+        heading.textContent = item.name;
+
+        const quantity = document.createElement("p");
+        quantity.textContent = "Quantity: " + item.quantity;
+
+        const addButton = document.createElement("button");
+        addButton.textContent = "Add Stock";
+        addButton.onclick = function () {
+            changeStock(id, 1);
+        };
+
+        const removeButton = document.createElement("button");
+        removeButton.textContent = "Remove Stock";
+        removeButton.onclick = function () {
+            changeStock(id, -1);
+        };
+
+        card.appendChild(heading);
+        card.appendChild(quantity);
+        card.appendChild(addButton);
+        card.appendChild(removeButton);
+        list.appendChild(card);
+    }
+}
+
+function changeStock(id, amount) {
+    if (stockItems[id].quantity + amount < 0) {
         document.getElementById("stockMessage").textContent =
             "Stock cannot go below zero.";
         return;
     }
 
-    stockItems[item] += amount;
-
-    const quantityIds = {
-        rice: "riceQuantity",
-        pasta: "pastaQuantity",
-        tomato: "tomatoQuantity"
-    };
-
-    document.getElementById(quantityIds[item]).textContent =
-        stockItems[item];
+    stockItems[id].quantity += amount;
+    saveStock();
+    displayStock();
 
     document.getElementById("stockMessage").textContent =
         "Stock updated successfully!";
 }
+
+document.getElementById("newFoodForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const nameInput = document.getElementById("newFoodName");
+    const quantityInput = document.getElementById("newFoodQuantity");
+    const message = document.getElementById("stockMessage");
+
+    const name = nameInput.value.trim();
+    const quantity = Number(quantityInput.value);
+
+    if (!name || !Number.isInteger(quantity) || quantity < 0) {
+        message.textContent = "Enter a food name and a valid quantity.";
+        return;
+    }
+
+    const duplicate = Object.values(stockItems).some(function(item) {
+        return item.name.toLowerCase() === name.toLowerCase();
+    });
+
+    if (duplicate) {
+        message.textContent = "That food item already exists.";
+        return;
+    }
+
+    const id = "food_" + Date.now();
+
+    stockItems[id] = {
+        name: name,
+        quantity: quantity
+    };
+
+    saveStock();
+    displayStock();
+    this.reset();
+    quantityInput.value = 1;
+
+    message.textContent = name + " added to the stock cupboard!";
+});
+
+displayStock();
