@@ -42,32 +42,33 @@
         <button onclick="showHome()">Back to Home</button>
     </div>
 
-   <div id="stock" style="display: none;">
+
+<div id="stock" style="display: none;">
     <h2>Stock Cupboard</h2>
     <p>Check and update kitchen supplies.</p>
 
-    <label for="stockItem">Choose an item</label>
-    <select id="stockItem">
-        <option value="Tins of tomatoes">Tins of tomatoes</option>
-        <option value="Pasta">Pasta</option>
-        <option value="Rice">Rice</option>
-    </select>
+    <div class="stock-item">
+        <h3>Rice</h3>
+        <p>Quantity: <strong id="riceQuantity">5</strong></p>
+        <button onclick="changeStock('rice', 1)">Add Stock</button>
+        <button onclick="changeStock('rice', -1)">Remove Stock</button>
+    </div>
 
-   <p>Current quantity: <strong id="stockQuantity">11</strong></p>
-<p id="stockList"></p>
+    <div class="stock-item">
+        <h3>Pasta</h3>
+        <p>Quantity: <strong id="pastaQuantity">9</strong></p>
+        <button onclick="changeStock('pasta', 1)">Add Stock</button>
+        <button onclick="changeStock('pasta', -1)">Remove Stock</button>
+    </div>
 
-    <label for="stockAction">Action</label>
-<select id="stockAction">
-    <option value="add">Add Stock</option>
-    <option value="remove">Remove Stock</option>
-</select>
+    <div class="stock-item">
+        <h3>Tins of tomatoes</h3>
+        <p>Quantity: <strong id="tomatoQuantity">11</strong></p>
+        <button onclick="changeStock('tomato', 1)">Add Stock</button>
+        <button onclick="changeStock('tomato', -1)">Remove Stock</button>
+    </div>
 
-<label for="stockChange">Quantity</label>
-<input type="number" id="stockChange" value="1" min="1">
-
-    <button onclick="updateStock()">Update Stock</button>
     <p id="stockMessage" role="status"></p>
-
     <button onclick="showHome()">Back to Home</button>
 </div>
 
