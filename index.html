@@ -8,13 +8,52 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Plaistow Community Kitchen</h1>
-    <p>Welcome to our volunteer booking system.</p>
 
-    <h2>What would you like to do?</h2>
+    <div id="home">
+        <h1>Plaistow Community Kitchen</h1>
+        <p>Welcome! What would you like to do?</p>
 
-    <button>Book a Shift</button>
-    <button>Tonight's Rota</button>
-    <button>Stock Cupboard</button>
+        <button onclick="showBooking()">Book Shift</button>
+        <button onclick="showStock()">Stock Cupboard</button>
+        <button onclick="showRota()">Tonight's Rota</button>
+    </div>
+
+    <div id="booking" style="display: none;">
+        <h2>Book a Shift</h2>
+
+        <form id="bookingForm">
+            <label for="volunteerName">Name</label>
+            <input type="text" id="volunteerName" required>
+
+            <label for="shiftDate">Date</label>
+            <input type="date" id="shiftDate" required>
+
+            <label for="shiftTime">Time</label>
+            <select id="shiftTime" required>
+                <option value="">Choose a shift</option>
+                <option value="9AM - 12PM">9AM - 12PM</option>
+                <option value="1PM - 5PM">1PM - 5PM</option>
+            </select>
+
+            <button type="submit">Confirm Booking</button>
+        </form>
+
+        <p id="bookingMessage" role="status"></p>
+        <button onclick="showHome()">Back to Home</button>
+    </div>
+
+    <div id="stock" style="display: none;">
+        <h2>Stock Cupboard</h2>
+        <p>Stock cupboard screen coming soon.</p>
+        <button onclick="showHome()">Back to Home</button>
+    </div>
+
+    <div id="rota" style="display: none;">
+        <h2>Tonight's Rota</h2>
+        <p>Volunteer rota screen coming soon.</p>
+        <button onclick="showHome()">Back to Home</button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
