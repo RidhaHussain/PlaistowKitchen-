@@ -72,3 +72,31 @@ document.getElementById("bookingForm").addEventListener("submit", function(event
     message.textContent = "Booking confirmed! Thank you, " + name + ".";
     document.getElementById("bookingForm").reset();
 });
+
+const stockItems = {
+    "Tins of tomatoes": 11,
+    "Pasta": 9,
+    "Rice": 5
+};
+
+function updateStock() {
+    const item = document.getElementById("stockItem").value;
+    const amount = Number(document.getElementById("stockChange").value);
+    const message = document.getElementById("stockMessage");
+
+    if (!Number.isInteger(amount) || amount <= 0) {
+        message.textContent = "Enter a quantity greater than zero.";
+        return;
+    }
+
+    const newQuantity = stockItems[item] + amount;
+
+    if (newQuantity < 0) {
+        message.textContent = "There is not enough stock to remove.";
+        return;
+    }
+
+    stockItems[item] = newQuantity;
+    document.getElementById("stockQuantity").textContent = newQuantity;
+    message.textContent = item + " updated successfully!";
+}
