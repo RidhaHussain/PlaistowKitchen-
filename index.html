@@ -53,10 +53,17 @@
         <option value="Rice">Rice</option>
     </select>
 
-    <p>Current quantity: <strong id="stockQuantity">8</strong></p>
+   <p>Current quantity: <strong id="stockQuantity">11</strong></p>
+<p id="stockList"></p>
 
-    <label for="stockChange">Quantity to add or remove</label>
-    <input type="number" id="stockChange" value="1">
+    <label for="stockAction">Action</label>
+<select id="stockAction">
+    <option value="add">Add Stock</option>
+    <option value="remove">Remove Stock</option>
+</select>
+
+<label for="stockChange">Quantity</label>
+<input type="number" id="stockChange" value="1" min="1">
 
     <button onclick="updateStock()">Update Stock</button>
     <p id="stockMessage" role="status"></p>
