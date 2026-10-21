@@ -72,38 +72,30 @@ document.getElementById("bookingForm").addEventListener("submit", function(event
     message.textContent = "Booking confirmed! Thank you, " + name + ".";
     document.getElementById("bookingForm").reset();
 });
-
-const stockItems = {
-    "Tins of tomatoes": 11,
-    "Pasta": 9,
-    "Rice": 5
+let stockItems = {
+    rice: 5,
+    pasta: 9,
+    tomato: 11
 };
 
-function updateStock() {
-    const item = document.getElementById("stockItem").value;
-    const amount = Number(document.getElementById("stockChange").value);
-    const action = document.getElementById("stockAction").value;
-    const message = document.getElementById("stockMessage");
-
-    if (!Number.isInteger(amount) || amount <= 0) {
-        message.textContent = "Enter a quantity greater than zero.";
+function changeStock(item, amount) {
+    if (stockItems[item] + amount < 0) {
+        document.getElementById("stockMessage").textContent =
+            "Stock cannot go below zero.";
         return;
     }
 
-    let newQuantity = stockItems[item];
+    stockItems[item] += amount;
 
-    if (action === "add") {
-        newQuantity += amount;
-    } else {
-        newQuantity -= amount;
-    }
+    const quantityIds = {
+        rice: "riceQuantity",
+        pasta: "pastaQuantity",
+        tomato: "tomatoQuantity"
+    };
 
-    if (newQuantity < 0) {
-        message.textContent = "There is not enough stock to remove.";
-        return;
-    }
+    document.getElementById(quantityIds[item]).textContent =
+        stockItems[item];
 
-    stockItems[item] = newQuantity;
-    document.getElementById("stockQuantity").textContent = newQuantity;
-    message.textContent = item + " updated successfully!";
+    document.getElementById("stockMessage").textContent =
+        "Stock updated successfully!";
 }
