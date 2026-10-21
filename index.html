@@ -42,11 +42,27 @@
         <button onclick="showHome()">Back to Home</button>
     </div>
 
-    <div id="stock" style="display: none;">
-        <h2>Stock Cupboard</h2>
-        <p>Stock cupboard screen coming soon.</p>
-        <button onclick="showHome()">Back to Home</button>
-    </div>
+   <div id="stock" style="display: none;">
+    <h2>Stock Cupboard</h2>
+    <p>Check and update kitchen supplies.</p>
+
+    <label for="stockItem">Choose an item</label>
+    <select id="stockItem">
+        <option value="Tins of tomatoes">Tins of tomatoes</option>
+        <option value="Pasta">Pasta</option>
+        <option value="Rice">Rice</option>
+    </select>
+
+    <p>Current quantity: <strong id="stockQuantity">8</strong></p>
+
+    <label for="stockChange">Quantity to add or remove</label>
+    <input type="number" id="stockChange" value="1">
+
+    <button onclick="updateStock()">Update Stock</button>
+    <p id="stockMessage" role="status"></p>
+
+    <button onclick="showHome()">Back to Home</button>
+</div>
 
     <div id="rota" style="display: none;">
         <h2>Tonight's Rota</h2>
