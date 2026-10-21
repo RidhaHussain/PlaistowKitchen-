@@ -67,6 +67,33 @@
         <button onclick="changeStock('tomato', 1)">Add Stock</button>
         <button onclick="changeStock('tomato', -1)">Remove Stock</button>
     </div>
+<div id="stock" style="display: none;">
+    <h2>Stock Cupboard</h2>
+    <p>Check and update kitchen supplies.</p>
+
+    <div id="stockList"></div>
+
+    <hr>
+
+    <h3>Add New Food</h3>
+
+    <form id="newFoodForm">
+        <label for="newFoodName">Food name</label>
+        <input
+            type="text"
+            id="newFoodName"
+            placeholder="e.g. Baked beans"
+            required
+        >
+
+        <label for="newFoodQuantity">Starting quantity</label>
+        <input
+            type="number"
+            id="newFoodQuantity"
+            min="0"
+            value="1"
+            required
+        >
 
     <p id="stockMessage" role="status"></p>
     <button onclick="showHome()">Back to Home</button>
