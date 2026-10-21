@@ -82,6 +82,7 @@ const stockItems = {
 function updateStock() {
     const item = document.getElementById("stockItem").value;
     const amount = Number(document.getElementById("stockChange").value);
+    const action = document.getElementById("stockAction").value;
     const message = document.getElementById("stockMessage");
 
     if (!Number.isInteger(amount) || amount <= 0) {
@@ -89,7 +90,13 @@ function updateStock() {
         return;
     }
 
-    const newQuantity = stockItems[item] + amount;
+    let newQuantity = stockItems[item];
+
+    if (action === "add") {
+        newQuantity += amount;
+    } else {
+        newQuantity -= amount;
+    }
 
     if (newQuantity < 0) {
         message.textContent = "There is not enough stock to remove.";
