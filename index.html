@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,102 +7,79 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div id="home">
+    <header>
         <h1>Plaistow Community Kitchen</h1>
-        <p>Welcome! What would you like to do?</p>
+        <p>Helping our community, together.</p>
+    </header>
 
-        <button onclick="showBooking()">Book Shift</button>
-        <button onclick="showStock()">Stock Cupboard</button>
-        <button onclick="showRota()">Tonight's Rota</button>
-    </div>
+    <main>
+        <section id="home" class="screen">
+            <h2>Welcome!</h2>
+            <p>What would you like to do?</p>
+            <button onclick="showBooking()">Book Shift</button>
+            <button onclick="showStock()">Stock Cupboard</button>
+            <button onclick="showRota()">Tonight's Rota</button>
+        </section>
 
-    <div id="booking" style="display: none;">
-        <h2>Book a Shift</h2>
+        <section id="booking" class="screen" hidden>
+            <h2>Book a Shift</h2>
+            <form id="bookingForm">
+                <label for="volunteerName">Your name</label>
+                <input type="text" id="volunteerName" required maxlength="60">
 
-        <form id="bookingForm">
-            <label for="volunteerName">Name</label>
-            <input type="text" id="volunteerName" required>
+                <label for="shiftDate">Date</label>
+                <input type="date" id="shiftDate" required>
 
-            <label for="shiftDate">Date</label>
-            <input type="date" id="shiftDate" required>
+                <label for="shiftTime">Choose a shift</label>
+                <select id="shiftTime" required>
+                    <option value="">Select a time</option>
+                    <option value="9AM - 12PM">Shift A: 9 AM - 12 PM</option>
+                    <option value="1PM - 5PM">Shift B: 1 PM - 5 PM</option>
+                </select>
 
-            <label for="shiftTime">Time</label>
-            <select id="shiftTime" required>
-                <option value="">Choose a shift</option>
-                <option value="9AM - 12PM">9AM - 12PM</option>
-                <option value="1PM - 5PM">1PM - 5PM</option>
-            </select>
+                <button type="submit">Confirm Booking</button>
+            </form>
+            <p id="bookingMessage" class="message" role="status"></p>
+            <button class="secondary" onclick="showHome()">Back to Home</button>
+        </section>
 
-            <button type="submit">Confirm Booking</button>
-        </form>
+        <section id="stock" class="screen" hidden>
+            <h2>Stock Cupboard</h2>
+            <p>Add food items and keep quantities up to date.</p>
 
-        <p id="bookingMessage" role="status"></p>
-        <button onclick="showHome()">Back to Home</button>
-    </div>
+            <div id="stockList"></div>
 
+            <div class="panel">
+                <h3>Add New Food</h3>
+                <form id="newFoodForm">
+                    <label for="newFoodName">Food name</label>
+                    <input type="text" id="newFoodName"
+                           placeholder="e.g. Baked beans"
+                           maxlength="60" required>
 
-<div id="stock" style="display: none;">
-    <h2>Stock Cupboard</h2>
-    <p>Check and update kitchen supplies.</p>
+                    <label for="newFoodQuantity">Starting quantity</label>
+                    <input type="number" id="newFoodQuantity"
+                           min="0" step="1" value="1" required>
 
-    <div class="stock-item">
-        <h3>Rice</h3>
-        <p>Quantity: <strong id="riceQuantity">5</strong></p>
-        <button onclick="changeStock('rice', 1)">Add Stock</button>
-        <button onclick="changeStock('rice', -1)">Remove Stock</button>
-    </div>
+                    <button type="submit">Add Food Item</button>
+                </form>
+            </div>
 
-    <div class="stock-item">
-        <h3>Pasta</h3>
-        <p>Quantity: <strong id="pastaQuantity">9</strong></p>
-        <button onclick="changeStock('pasta', 1)">Add Stock</button>
-        <button onclick="changeStock('pasta', -1)">Remove Stock</button>
-    </div>
+            <p id="stockMessage" class="message" role="status"></p>
+            <button class="secondary" onclick="showHome()">Back to Home</button>
+        </section>
 
-    <div class="stock-item">
-        <h3>Tins of tomatoes</h3>
-        <p>Quantity: <strong id="tomatoQuantity">11</strong></p>
-        <button onclick="changeStock('tomato', 1)">Add Stock</button>
-        <button onclick="changeStock('tomato', -1)">Remove Stock</button>
-    </div>
-<div id="stock" style="display: none;">
-    <h2>Stock Cupboard</h2>
-    <p>Check and update kitchen supplies.</p>
+        <section id="rota" class="screen" hidden>
+            <h2>Volunteer Rota</h2>
+            <p>View the booked shifts for each day.</p>
+            <div id="rotaList"></div>
+            <button class="secondary" onclick="showHome()">Back to Home</button>
+        </section>
+    </main>
 
-    <div id="stockList"></div>
-
-    <hr>
-
-    <h3>Add New Food</h3>
-
-    <form id="newFoodForm">
-        <label for="newFoodName">Food name</label>
-        <input
-            type="text"
-            id="newFoodName"
-            placeholder="e.g. Baked beans"
-            required
-        >
-
-        <label for="newFoodQuantity">Starting quantity</label>
-        <input
-            type="number"
-            id="newFoodQuantity"
-            min="0"
-            value="1"
-            required
-        >
-
-    <p id="stockMessage" role="status"></p>
-    <button onclick="showHome()">Back to Home</button>
-</div>
-
-    <div id="rota" style="display: none;">
-        <h2>Tonight's Rota</h2>
-        <p>Volunteer rota screen coming soon.</p>
-        <button onclick="showHome()">Back to Home</button>
-    </div>
+    <footer>
+        <p>Plaistow Community Kitchen · Volunteer Portal</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
